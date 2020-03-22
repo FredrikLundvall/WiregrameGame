@@ -9,12 +9,10 @@ namespace BlowtorchesAndGunpowder
     {
         public readonly string ServerIp;
         public readonly int ServerPort;
-        public readonly string MyUsername;
-        public Settings(string aServerIp, int aServerPort, string aMyUsername)
+        public Settings(string aServerIp, int aServerPort)
         {
             ServerIp = aServerIp;
             ServerPort = aServerPort;
-            MyUsername = aMyUsername;
         }
     }
 }

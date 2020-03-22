@@ -17,19 +17,16 @@ namespace BlowtorchesAndGunpowder
             _settings = aSettings;
             InitializeComponent();
         }
-
         private void SettingsForm_Load(object sender, EventArgs e)
         {
             serverIpTxt.Text = _settings.ServerIp;
             serverPortTxt.Text = _settings.ServerPort.ToString();
-            myUsernameTxt.Text = _settings.MyUsername;
         }
-
         private void saveBtn_Click(object sender, EventArgs e)
         {
             int port = 0;
             int.TryParse(serverPortTxt.Text, out port);
-            _settings = new Settings(serverIpTxt.Text, port, myUsernameTxt.Text);
+            _settings = new Settings(serverIpTxt.Text, port);
         }
         public Settings GetSettings()
         {

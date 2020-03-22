@@ -8,7 +8,8 @@ namespace BlowtorchesAndGunpowder
         [STAThread]
         public static void Main(string[] args)
         {
-            //Application.
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new WireframeLobby());
         }
     }

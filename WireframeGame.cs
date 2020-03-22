@@ -16,7 +16,6 @@ namespace BlowtorchesAndGunpowder
         private TimeSpan _totalTimeElapsedWhenUpdateScreen;
         private TimeSpan _totalTimeElapsedWhenLastShot;
         private bool _pause = false;
-        private Settings _settings = new Settings("localhost",4567,"Player1");
 
         Pen _heroShotPen = new Pen(Color.YellowGreen);
         Pen _heroShipPen = new Pen(Color.Cornsilk);
@@ -69,7 +68,7 @@ namespace BlowtorchesAndGunpowder
                     return;
                 _pause = true;
                 //Cursor.Show();
-                SettingsForm settingsForm = new SettingsForm(_settings);
+                GameSettingsForm settingsForm = new GameSettingsForm(new Settings("localhost", 4567));
                 DialogResult settingsResult = settingsForm.ShowDialog(this);
                 if (settingsResult == DialogResult.Abort)
                     Close();
@@ -77,7 +76,7 @@ namespace BlowtorchesAndGunpowder
                     _pause = false;
                 else if (settingsResult == DialogResult.OK)
                 {
-                    _settings = settingsForm.GetSettings();
+                    //_settings = settingsForm.GetSettings();
                     _pause = false;
                 }
                 //Cursor.Hide();
@@ -96,7 +95,7 @@ namespace BlowtorchesAndGunpowder
                 //CheckBounds(new RectangleF(0, 0, this.ClientSize.Width - size, this.ClientSize.Height - size));
 
                 TimeSpan timeElapsedFromLastUpdateScreen = timeElapsedNow - _totalTimeElapsedWhenUpdateScreen;
-                if (timeElapsedFromLastUpdateScreen.Milliseconds > 46)
+                if (timeElapsedFromLastUpdateScreen.Milliseconds > 16)
                 {
                     _totalTimeElapsedWhenUpdateScreen = timeElapsedNow;
                     UpdateScreen();
