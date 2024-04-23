@@ -26,6 +26,15 @@ namespace BlowtorchesAndGunpowder
             LoggedInUser oldLoggedInUser;
             return _loggedInUserList.TryRemove(aUsername, out oldLoggedInUser);
         }
+        public static LoggedInUser GetLoggedInUser(string aUsername)
+        {
+            LoggedInUser loggedInUser;
+            if (_loggedInUserList.TryGetValue(aUsername, out loggedInUser))
+            {
+                return loggedInUser;
+            }
+            return null;
+        }
         public static string GetListAsJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(_loggedInUserList.Values);

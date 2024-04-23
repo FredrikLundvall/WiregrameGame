@@ -8,10 +8,11 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>BlowtorchesAndGunpowder</RootNamespace>
     <AssemblyName>WireframeGameServer</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -49,9 +50,12 @@
   <ItemGroup>
     <Compile Include="CreatedGame.cs" />
     <Compile Include="CreatedGameList.cs" />
+    <Compile Include="GameState.cs" />
     <Compile Include="LoggedInUserList.cs" />
     <Compile Include="LoginAccountList.cs" />
     <Compile Include="NetworkServer.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="PlayerList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Session.cs" />

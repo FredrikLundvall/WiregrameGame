@@ -82,8 +82,11 @@ namespace BlowtorchesAndGunpowder
             {
                 loggedInPlayersLb.Items.Add(loggedInUser);
             }
-            if (selLoggedInUser != null && loggedInPlayersLb.Items.Contains(selLoggedInUser))
-                loggedInPlayersLb.SelectedItem = selLoggedInUser;
+            if (selLoggedInUser != null)
+            {
+                int index = loggedInPlayersLb.FindString(selLoggedInUser.ToString());
+                loggedInPlayersLb.SetSelected(index, true);
+            }
             var availableGameList = await client.GetListAvailableGameAsync();
             AvailableGame selAvailableGame = currentGamesLb.SelectedItem as AvailableGame;
             currentGamesLb.Items.Clear();
@@ -91,8 +94,11 @@ namespace BlowtorchesAndGunpowder
             {
                 currentGamesLb.Items.Add(availableGame);
             }
-            if(selAvailableGame != null && currentGamesLb.Items.Contains(selAvailableGame))
-                currentGamesLb.SelectedItem = selAvailableGame;
+            if (selAvailableGame != null)
+            {
+                int index = currentGamesLb.FindString(selAvailableGame.ToString());
+                currentGamesLb.SetSelected(index, true);
+            }
             connectionFailedLbl.Visible = client.ConnectionFailing;
         }
         private void createLoginBtn_Click(object sender, EventArgs e)

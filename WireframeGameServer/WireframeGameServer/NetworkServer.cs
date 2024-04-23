@@ -106,6 +106,10 @@ namespace BlowtorchesAndGunpowder
             {
                 return handleJoinGameRequest(requestData);
             }
+            else if (requestData["action"] == "game_update")
+            {
+                return handleGameUpdateRequest(requestData);
+            }
             else
             {
                 return handleNonMatchingRequest(requestData);
@@ -187,7 +191,7 @@ namespace BlowtorchesAndGunpowder
             var createdGame = CreatedGameList.GetCreatedGame(requestData["gamename"]);
             if (session != null && createdGame != null)
             {
-                if(LoggedInUserList.UpdateCurrentGamenameOnLoggedInUser(session.LoginUsername, requestData["gamename"]))
+                if(createdGame.TryAddPlayer(session.Token, new Player(LoggedInUserList.GetLoggedInUser(session.LoginUsername).Playername)) && LoggedInUserList.UpdateCurrentGamenameOnLoggedInUser(session.LoginUsername, requestData["gamename"]))
                     responseData.Add("result", "success");
                 else
                     responseData.Add("result", "fail");
@@ -200,6 +204,18 @@ namespace BlowtorchesAndGunpowder
         {
             var responseData = HttpUtility.ParseQueryString("");
             responseData.Add("result", "fail");
+            return responseData.ToString();
+        }
+        private static string handleGameUpdateRequest(NameValueCollection requestData)
+        {
+            var responseData = HttpUtility.ParseQueryString("");
+            var createdGame = CreatedGameList.GetCreatedGame(requestData["gamename"]);
+            if (createdGame != null && createdGame.HasPlayer(requestData["token"]))
+            {                
+                //requestData["fromtrans"]
+            }
+            else
+                responseData.Add("result", "fail");
             return responseData.ToString();
         }
     }
