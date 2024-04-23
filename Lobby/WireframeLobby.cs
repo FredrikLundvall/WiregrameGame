@@ -15,12 +15,14 @@ namespace BlowtorchesAndGunpowder
         }
         private void startBtn_Click(object sender, EventArgs e)
         {
+            refreshTim.Enabled = false;
             WireframeGame theGame = new WireframeGame();
             this.ShowInTaskbar = false;
             theGame.ShowInTaskbar = true;
             theGame.ShowDialog();
             theGame.ShowInTaskbar = false;
             this.ShowInTaskbar = true;
+            refreshTim.Enabled = true;
         }
         private void quitBtn_Click(object sender, EventArgs e)
         {
@@ -37,7 +39,7 @@ namespace BlowtorchesAndGunpowder
             DialogResult loginResult = loginForm.ShowDialog(this);
             if (loginResult == DialogResult.OK)
             {
-                NetworkClient client = new NetworkClient(_settings);
+                LobbyClient client = new LobbyClient(_settings);
                 LoginInfo loginInfo = loginForm.getLoginInfo();
                 login(loginInfo.Username, loginInfo.Password);
             }
@@ -55,7 +57,7 @@ namespace BlowtorchesAndGunpowder
         {
             if (_currentLoginSession == null)
                 return;
-            NetworkClient client = new NetworkClient(_settings);
+            LobbyClient client = new LobbyClient(_settings);
             client.RemoveSession(_currentLoginSession);
             _currentLoginSession = null;
             refreshLists();
@@ -66,7 +68,7 @@ namespace BlowtorchesAndGunpowder
         }
         private void login(string aUsername, string aPassword)
         {
-            NetworkClient client = new NetworkClient(_settings);
+            LobbyClient client = new LobbyClient(_settings);
             _currentLoginSession = client.CreateSession(aUsername, aPassword);
             if (_currentLoginSession == null)
                 MessageBox.Show(this, "Inloggning misslyckades, användarnamnet eller lösenordet är felaktigt!");
@@ -74,7 +76,7 @@ namespace BlowtorchesAndGunpowder
         }
         private async void refreshLists()
         {
-            NetworkClient client = new NetworkClient(_settings);
+            LobbyClient client = new LobbyClient(_settings);
             var loggedInUserList = await client.GetListLoggedInUserAsync();
             LoggedInUser selLoggedInUser = loggedInPlayersLb.SelectedItem as LoggedInUser;
             loggedInPlayersLb.Items.Clear();
@@ -110,7 +112,7 @@ namespace BlowtorchesAndGunpowder
                 DialogResult loginResult = createLoginForm.ShowDialog(this);
                 if (loginResult == DialogResult.OK)
                 {
-                    NetworkClient client = new NetworkClient(_settings);
+                    LobbyClient client = new LobbyClient(_settings);
                     loginAccount = createLoginForm.getLoginAccount();
                     if (!client.CreateLogin(loginAccount))
                         MessageBox.Show(this, "Skapande av inloggning misslyckades, användarnamnet finns redan!");
@@ -136,7 +138,7 @@ namespace BlowtorchesAndGunpowder
                 DialogResult loginResult = createLoginForm.ShowDialog(this);
                 if (loginResult == DialogResult.OK)
                 {
-                    NetworkClient client = new NetworkClient(_settings);
+                    LobbyClient client = new LobbyClient(_settings);
                     if (!client.UpdateLogin(createLoginForm.getLoginAccount(), _currentLoginSession.Password, _currentLoginSession.Playername))
                         MessageBox.Show(this, "Uppdatering av inloggning misslyckades, gamla värdet stämmer inte!");
                 }
@@ -155,7 +157,7 @@ namespace BlowtorchesAndGunpowder
             DialogResult settingsResult = createGameForm.ShowDialog(this);
             if (settingsResult == DialogResult.OK)
             {
-                NetworkClient client = new NetworkClient(_settings);
+                LobbyClient client = new LobbyClient(_settings);
                 var gameInfo = createGameForm.getGameInfo();
                 if (!client.CreateGame(_currentLoginSession.SessionToken, gameInfo))
                     MessageBox.Show(this, "Skapande av spel misslyckades!");
@@ -190,7 +192,7 @@ namespace BlowtorchesAndGunpowder
                     return;
                 pinCode = enterPincode.getPincode();
             }
-            NetworkClient client = new NetworkClient(_settings);
+            LobbyClient client = new LobbyClient(_settings);
             if (!client.JoinGame(selGame.Gamename, pinCode, _currentLoginSession.SessionToken))
                 MessageBox.Show(this, "Det gick inte att gå med i spelet!");
             else

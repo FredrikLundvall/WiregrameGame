@@ -83,7 +83,7 @@
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="GameClient\LoginSession.cs" />
-    <Compile Include="GameClient\NetworkClient.cs" />
+    <Compile Include="GameClient\LobbyClient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="GameClient\Settings.cs" />
     <Compile Include="Lobby\SettingsForm.cs">

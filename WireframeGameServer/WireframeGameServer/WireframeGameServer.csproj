@@ -53,7 +53,7 @@
     <Compile Include="GameState.cs" />
     <Compile Include="LoggedInUserList.cs" />
     <Compile Include="LoginAccountList.cs" />
-    <Compile Include="NetworkServer.cs" />
+    <Compile Include="LobbyServer.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerList.cs" />
     <Compile Include="Program.cs" />

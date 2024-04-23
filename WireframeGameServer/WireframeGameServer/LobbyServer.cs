@@ -8,12 +8,12 @@ using System.Collections.Specialized;
 using System.Threading.Tasks;
 namespace BlowtorchesAndGunpowder
 {
-    public class NetworkServer
+    public class LobbyServer
     {
         public static HttpListener _listener;
         public static string _url;
 
-        public NetworkServer(string url)
+        public LobbyServer(string url)
         {
             _url = url;
             // Create a Http server 

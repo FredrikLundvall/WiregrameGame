@@ -14,7 +14,7 @@ namespace BlowtorchesAndGunpowder
         public static void Main(string[] args)
         {
             // Create a NetworkServer and start listening for incoming connections
-            var server = new NetworkServer("http://localhost:4567/");
+            var server = new LobbyServer("http://localhost:4567/");
             Task.Run(() => server.Start());
             Console.WriteLine("Press any key to stop server...");
             Console.ReadKey();

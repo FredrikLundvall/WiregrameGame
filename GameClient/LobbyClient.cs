@@ -7,13 +7,13 @@ using System.Collections.Specialized;
 
 namespace BlowtorchesAndGunpowder
 {
-    public class NetworkClient
+    public class LobbyClient
     {
         public bool ConnectionFailing { get; private set; } = false;
 
         private static readonly HttpClient _client = new HttpClient();
         private readonly Settings _settings;
-        public NetworkClient(Settings settings)
+        public LobbyClient(Settings settings)
         {
             _settings = settings;
         }
