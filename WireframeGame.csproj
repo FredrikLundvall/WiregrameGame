@@ -55,7 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameClient\AvailableGame.cs" />
+    <Compile Include="LobbyClient\AvailableGame.cs" />
     <Compile Include="Lobby\EnterPincodeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,10 +82,10 @@
     <Compile Include="Lobby\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="GameClient\LoginSession.cs" />
-    <Compile Include="GameClient\LobbyClient.cs" />
+    <Compile Include="LobbyClient\LoginSession.cs" />
+    <Compile Include="LobbyClient\LobbyClient.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="GameClient\Settings.cs" />
+    <Compile Include="LobbyClient\Settings.cs" />
     <Compile Include="Lobby\SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
