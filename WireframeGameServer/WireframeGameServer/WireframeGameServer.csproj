@@ -48,23 +48,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreatedGame.cs" />
-    <Compile Include="CreatedGameList.cs" />
+    <Compile Include="LobbyServer\CreatedGame.cs" />
+    <Compile Include="LobbyServer\CreatedGameList.cs" />
     <Compile Include="GameState.cs" />
-    <Compile Include="LoggedInUserList.cs" />
-    <Compile Include="LoginAccountList.cs" />
-    <Compile Include="LobbyServer.cs" />
-    <Compile Include="Player.cs" />
-    <Compile Include="PlayerList.cs" />
+    <Compile Include="LobbyServer\LoggedInUserList.cs" />
+    <Compile Include="LobbyServer\LoginAccountList.cs" />
+    <Compile Include="LobbyServer\LobbyServer.cs" />
+    <Compile Include="LobbyServer\Player.cs" />
+    <Compile Include="LobbyServer\PlayerList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Session.cs" />
-    <Compile Include="SessionList.cs" />
+    <Compile Include="LobbyServer\Session.cs" />
+    <Compile Include="LobbyServer\SessionList.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="..\..\..\BlowtorchesAndGunpowder\BlowtorchesAndGunpowder.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
