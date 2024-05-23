@@ -14,12 +14,16 @@ namespace BlowtorchesAndGunpowder
         public static void Main(string[] args)
         {
             // Create a NetworkServer and start listening for incoming connections
-            var server = new LobbyServer("http://localhost:4567/");
-            Task.Run(() => server.Start());
+            var lobbyServer = new LobbyServer("http://localhost:4567/");
+            Task.Run(() => lobbyServer.Start());
+            var gameServer = new GameServer();
+            Task.Run(() => gameServer.Start());
+
             Console.WriteLine("Press any key to stop server...");
             Console.ReadKey();
+            gameServer.Stop();
             //Stop the server at the end
-            server.Stop();
+            lobbyServer.Stop();
         }
     }
 }

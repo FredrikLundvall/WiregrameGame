@@ -21,7 +21,8 @@ namespace BlowtorchesAndGunpowder
         Pen _heroShipPen = new Pen(Color.Cornsilk);
         Ship _heroShip = new Ship();
         List<Shot> _heroShotList = new List<Shot>();
-        
+        GameClient _gameClient = new GameClient();
+
         public WireframeGame() : base()
         {
             InitializeComponent();
@@ -71,7 +72,10 @@ namespace BlowtorchesAndGunpowder
                 GameSettingsForm settingsForm = new GameSettingsForm(new Settings("localhost", 4567));
                 DialogResult settingsResult = settingsForm.ShowDialog(this);
                 if (settingsResult == DialogResult.Abort)
+                {
+                    _gameClient.Close();
                     Close();
+                }
                 else if (settingsResult == DialogResult.Cancel)
                     _pause = false;
                 else if (settingsResult == DialogResult.OK)
@@ -114,6 +118,7 @@ namespace BlowtorchesAndGunpowder
             {
                 _heroShotList.Add(new Shot(_totalTimeElapsed, _heroShip.GetPosition(), _heroShip.GetDirection(), _heroShip.GetSpeedVector()));
                 _totalTimeElapsedWhenLastShot = _totalTimeElapsed;
+                _gameClient.SendMessage("Shooting");
             }
         }
         private void DoChange(TimeSpan aTimeElapsed)
@@ -208,29 +213,6 @@ namespace BlowtorchesAndGunpowder
                 this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             }
         }        //The equivalent of PeekMessage() is Application.DoEvents().  You could modify your Main() function in Program.cs like this:
-        //[STAThread]
-        //static void Main()
-        //{
-        //    Application.EnableVisualStyles();
-        //    Application.SetCompatibleTextRenderingDefault(false);
-        //    Form1 f1 = new Form1();
-        //    f1.FormClosed += QuitLoop;
-        //    f1.Show();
-        //    do
-        //    {
-        //        Application.DoEvents();
-        //        // Do your stuff to implement the main game loop
-        //        //...
-        //        // Yield the CPU
-        //        System.Threading.Thread.Sleep(1);
-        //    } while (!mQuit);
-        //}
-        //private static bool mQuit;
-        //private static void QuitLoop(object sender, FormClosedEventArgs e)
-        //{
-        //    mQuit = true;
-        //}
-        //Use Sleep(0) if you want all the CPU cycles you can get.
     }
 }
 

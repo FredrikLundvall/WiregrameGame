@@ -200,18 +200,3 @@ namespace BlowtorchesAndGunpowder
         }
     }
 }
-
-
-//public void ValidateFileAsync(string aFilename)
-//{
-//    Task.Run(() => ValidateOneFile(droppedPricefiles.Values[0]));
-//}
-//private void ValidateOneFile(string aFilename)
-//{
-//    listBoxMessages.Invoke(new Action(() => listBoxMessages.Items.Add("Validering påbörjad av " + aFilename)));
-//    PricelistFile pricelistFile = new PricelistFile(aFilename);
-//    string statistics = pricelistFile.GetSingleFileStatisticsReport();
-//    ViewTextForm viewStatistics = new ViewTextForm("Statistik", statistics);
-//    listBoxMessages.Invoke(new Action(() => listBoxMessages.Items.Add("Validering avslutad av " + aFilename)));
-//    viewStatistics.ShowDialog();
-//}

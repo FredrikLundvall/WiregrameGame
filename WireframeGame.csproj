@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameClient\GameClient.cs" />
     <Compile Include="LobbyClient\AvailableGame.cs" />
     <Compile Include="Lobby\EnterPincodeForm.cs">
       <SubType>Form</SubType>
