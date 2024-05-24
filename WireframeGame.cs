@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Diagnostics;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BlowtorchesAndGunpowder
 {
@@ -56,6 +57,7 @@ namespace BlowtorchesAndGunpowder
             //DoChange();
             //DrawToBuffer(grafx.Graphics);
             //this.WindowState = FormWindowState.Maximized;
+            Task.Run(() => _gameClient.Start());
             stopWatch.Start();
             _totalTimeElapsed = stopWatch.Elapsed;
             _totalTimeElapsedWhenUpdateScreen = _totalTimeElapsed;
@@ -118,7 +120,7 @@ namespace BlowtorchesAndGunpowder
             {
                 _heroShotList.Add(new Shot(_totalTimeElapsed, _heroShip.GetPosition(), _heroShip.GetDirection(), _heroShip.GetSpeedVector()));
                 _totalTimeElapsedWhenLastShot = _totalTimeElapsed;
-                _gameClient.SendMessage("Shooting");
+                _gameClient.SendMessage("I shot you!");
             }
         }
         private void DoChange(TimeSpan aTimeElapsed)

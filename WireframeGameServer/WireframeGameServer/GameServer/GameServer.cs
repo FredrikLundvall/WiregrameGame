@@ -13,7 +13,8 @@ namespace BlowtorchesAndGunpowder
         const int UDP_PORT = 11000;
         //byte[] myBuffer = new byte[65536];
         private bool fStarted = false;
-        public IPEndPoint fLocalEndPoint = new IPEndPoint(IPAddress.Loopback, UDP_PORT);
+        private IPEndPoint fLocalEndPoint = new IPEndPoint(IPAddress.Loopback, UDP_PORT);
+        private List<IPEndPoint> fAllClientEndpoints = new List<IPEndPoint>();
 
         public void Start()
         {
@@ -30,9 +31,18 @@ namespace BlowtorchesAndGunpowder
                 {
                     //IPEndPoint object will allow us to read datagrams sent from any source.
                     var receivedResults = udpClient.Receive(ref remoteEndPoint);
+                    if(!fAllClientEndpoints.Any(s => s.ToString() == remoteEndPoint.ToString())) 
+                    {
+                        fAllClientEndpoints.Add(new IPEndPoint(remoteEndPoint.Address, remoteEndPoint.Port));
+                        Console.WriteLine("Adding new client {0}", remoteEndPoint.ToString());
+                    }
                     var datagram = Encoding.ASCII.GetString(receivedResults);
                     Console.WriteLine("Receiving udp from {0} - {1}", remoteEndPoint.ToString(), datagram);
                     loggingEvent += datagram;
+                    if(datagram == "I shot you!")
+                    {
+                        SendMessage("You missed!");
+                    }
                 }
             }
         }
@@ -40,5 +50,18 @@ namespace BlowtorchesAndGunpowder
         {
             fStarted = false;
         }
+        public void SendMessage(String aMessage)
+        {
+            UdpClient udpSender = new UdpClient();
+            udpSender.ExclusiveAddressUse = false;
+            udpSender.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+            udpSender.Client.Bind(fLocalEndPoint);
+            byte[] datagram = Encoding.ASCII.GetBytes(aMessage);
+            foreach(var endpoint in fAllClientEndpoints)
+            {
+                udpSender.Send(datagram, datagram.Length, endpoint);
+            }
+        }
+
     }
 }
