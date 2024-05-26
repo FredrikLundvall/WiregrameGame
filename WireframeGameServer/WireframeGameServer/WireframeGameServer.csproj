@@ -51,7 +51,6 @@
     <Compile Include="GameServer\GameServer.cs" />
     <Compile Include="LobbyServer\CreatedGame.cs" />
     <Compile Include="LobbyServer\CreatedGameList.cs" />
-    <Compile Include="GameState.cs" />
     <Compile Include="LobbyServer\LoggedInUserList.cs" />
     <Compile Include="LobbyServer\LoginAccountList.cs" />
     <Compile Include="LobbyServer\LobbyServer.cs" />

@@ -39,9 +39,13 @@ namespace BlowtorchesAndGunpowder
                     var datagram = Encoding.ASCII.GetString(receivedResults);
                     Console.WriteLine("Receiving udp from {0} - {1}", remoteEndPoint.ToString(), datagram);
                     loggingEvent += datagram;
-                    if(datagram == "I shot you!")
+                    if (datagram.EndsWith("\"FromServer\":false}"))
                     {
-                        SendMessage("You missed!");
+                        var clientAction = ClientAction.CreateFromJson(datagram);
+                        if (clientAction.PlayerShooting)
+                        {
+                            SendMessage("You missed!");
+                        }
                     }
                 }
             }
