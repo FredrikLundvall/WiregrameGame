@@ -9,20 +9,25 @@ namespace BlowtorchesAndGunpowder
     {
         private Settings _settings = new Settings("localhost", 4567);
         private LoginSession _currentLoginSession = null;
+        private bool _refreshLobby = false;
         public WireframeLobby()
         {
             InitializeComponent();
         }
         private void startBtn_Click(object sender, EventArgs e)
         {
-            refreshTim.Enabled = false;
+            //refreshTim.Enabled = false;
+            _refreshLobby = false;
+
             WireframeGame theGame = new WireframeGame();
             this.ShowInTaskbar = false;
             theGame.ShowInTaskbar = true;
             theGame.ShowDialog();
             theGame.ShowInTaskbar = false;
             this.ShowInTaskbar = true;
-            refreshTim.Enabled = true;
+
+            _refreshLobby = true;
+            //refreshTim.Enabled = true;
         }
         private void quitBtn_Click(object sender, EventArgs e)
         {
@@ -103,6 +108,7 @@ namespace BlowtorchesAndGunpowder
             }
             connectionFailedLbl.Visible = client.ConnectionFailing;
         }
+
         private void createLoginBtn_Click(object sender, EventArgs e)
         {
             CreateLoginForm createLoginForm = new CreateLoginForm();
@@ -167,7 +173,8 @@ namespace BlowtorchesAndGunpowder
         }
         private void refreshTim_Tick(object sender, EventArgs e)
         {
-            refreshLists();
+            if(_refreshLobby)
+                refreshLists();
         }
 
         private void joinGameBtn_Click(object sender, EventArgs e)

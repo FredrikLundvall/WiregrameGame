@@ -10,41 +10,43 @@ namespace BlowtorchesAndGunpowder
 {
     internal class GameServer
     {
-        const int UDP_PORT = 11000;
-        //byte[] myBuffer = new byte[65536];
+        const int UDP_SERVER_PORT = 11000;
+        const int UDP_CLIENT_PORT = 11001;
         private bool fStarted = false;
-        private IPEndPoint fLocalEndPoint = new IPEndPoint(IPAddress.Loopback, UDP_PORT);
+        private IPEndPoint fLocalEndPoint = new IPEndPoint(IPAddress.Loopback, UDP_SERVER_PORT);
         private List<IPEndPoint> fAllClientEndpoints = new List<IPEndPoint>();
 
         public void Start()
         {
-             fStarted = true;
-             using (var udpClient = new UdpClient())
-             {
-                var remoteEndPoint = new IPEndPoint(IPAddress.Any, UDP_PORT);
+            fStarted = true;
+            using (var udpClient = new UdpClient())
+            {
+                var remoteEndPoint = new IPEndPoint(IPAddress.Any, UDP_SERVER_PORT);
                 udpClient.ExclusiveAddressUse = false;
                 udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
                 udpClient.Client.Bind(fLocalEndPoint);
-                Console.WriteLine("Listening for udp on port {0}", UDP_PORT);
-                string loggingEvent = "";
+                Console.WriteLine("Listening for udp {0}", remoteEndPoint.ToString());
+                string allDatagrams = "";
                 while (fStarted)
                 {
                     //IPEndPoint object will allow us to read datagrams sent from any source.
                     var receivedResults = udpClient.Receive(ref remoteEndPoint);
-                    if(!fAllClientEndpoints.Any(s => s.ToString() == remoteEndPoint.ToString())) 
+                    if(!fAllClientEndpoints.Any(s => s.Address.ToString() == remoteEndPoint.Address.ToString())) 
                     {
-                        fAllClientEndpoints.Add(new IPEndPoint(remoteEndPoint.Address, remoteEndPoint.Port));
-                        Console.WriteLine("Adding new client {0}", remoteEndPoint.ToString());
+                        fAllClientEndpoints.Add(new IPEndPoint(remoteEndPoint.Address, UDP_CLIENT_PORT));
+                        Console.WriteLine("Adding new client {0}", remoteEndPoint.Address.ToString());
                     }
                     var datagram = Encoding.ASCII.GetString(receivedResults);
                     Console.WriteLine("Receiving udp from {0} - {1}", remoteEndPoint.ToString(), datagram);
-                    loggingEvent += datagram;
+                    allDatagrams += datagram;
                     if (datagram.EndsWith("\"FromServer\":false}"))
                     {
                         var clientAction = ClientAction.CreateFromJson(datagram);
                         if (clientAction.PlayerShooting)
                         {
-                            SendMessage("You missed!");
+                            var gameState = new GameState();
+                            gameState.PlayerShoot.Add(0, true);
+                            SendMessage(gameState.GetAsJson());
                         }
                     }
                 }
@@ -64,6 +66,7 @@ namespace BlowtorchesAndGunpowder
             foreach(var endpoint in fAllClientEndpoints)
             {
                 udpSender.Send(datagram, datagram.Length, endpoint);
+                Console.WriteLine("Sending data to {0} - {1}", endpoint.ToString(), aMessage);
             }
         }
 

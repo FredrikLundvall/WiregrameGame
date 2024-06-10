@@ -50,7 +50,7 @@
             // startBtn
             // 
             this.startBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.startBtn.Location = new System.Drawing.Point(614, 341);
+            this.startBtn.Location = new System.Drawing.Point(614, 305);
             this.startBtn.Name = "startBtn";
             this.startBtn.Size = new System.Drawing.Size(103, 23);
             this.startBtn.TabIndex = 0;
@@ -61,7 +61,7 @@
             // quitBtn
             // 
             this.quitBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.quitBtn.Location = new System.Drawing.Point(12, 341);
+            this.quitBtn.Location = new System.Drawing.Point(12, 305);
             this.quitBtn.Name = "quitBtn";
             this.quitBtn.Size = new System.Drawing.Size(122, 23);
             this.quitBtn.TabIndex = 1;
@@ -126,7 +126,7 @@
             // settingsBtn
             // 
             this.settingsBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.settingsBtn.Location = new System.Drawing.Point(12, 299);
+            this.settingsBtn.Location = new System.Drawing.Point(12, 276);
             this.settingsBtn.Name = "settingsBtn";
             this.settingsBtn.Size = new System.Drawing.Size(122, 23);
             this.settingsBtn.TabIndex = 8;
@@ -146,7 +146,7 @@
             // 
             // refreshBtn
             // 
-            this.refreshBtn.Location = new System.Drawing.Point(610, 208);
+            this.refreshBtn.Location = new System.Drawing.Point(614, 450);
             this.refreshBtn.Name = "refreshBtn";
             this.refreshBtn.Size = new System.Drawing.Size(103, 23);
             this.refreshBtn.TabIndex = 10;
@@ -195,7 +195,7 @@
             this.connectionFailedLbl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.connectionFailedLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.connectionFailedLbl.Location = new System.Drawing.Point(240, 341);
+            this.connectionFailedLbl.Location = new System.Drawing.Point(240, 305);
             this.connectionFailedLbl.Name = "connectionFailedLbl";
             this.connectionFailedLbl.Size = new System.Drawing.Size(271, 23);
             this.connectionFailedLbl.TabIndex = 14;
@@ -207,7 +207,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(729, 376);
+            this.ClientSize = new System.Drawing.Size(729, 340);
             this.Controls.Add(this.connectionFailedLbl);
             this.Controls.Add(this.joinGameBtn);
             this.Controls.Add(this.createGameBtn);
